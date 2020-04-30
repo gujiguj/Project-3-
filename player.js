@@ -28,3 +28,51 @@ var searchPlayer = function(){
     }
     request.send();
 }
+
+var generateTable = function(per_page){
+    document.write('<table><thead><tr><th>Name</th><th>Team</th></tr></thead><tbody>');
+    for(var i = 0; i < per_page; i++){
+        document.write('<tr id = "r' + i + '"></tr>');
+    }
+    document.write('</tbody></table>')
+}
+
+var listPlayers = function(page, per_page){
+    var request = new XMLHttpRequest();
+    request.open("GET", 'https://www.balldontlie.io/api/v1/players?page=' + page + '?per_page=' + per_page, true);
+    request.onload = function(){
+        var dataArray = JSON.parse(this.response);
+        var data = dataArray.data;
+        //document.getElementById("a").innerHTML = `${firstName} ${lastName} ${team}`;
+        //document.write('<p>' + firstName + ' ' + lastName + ' ' + team + '</p>');
+        //document.write('<tr><td>' + firstName + ' ' + lastName + '</td><td>' + team + '</td></tr>');
+        for(var i = 0; i < data.length; i++) {
+            if(per_page > data.length){
+                for(var j = per_page-1; j > data.length-1; j--){
+                    document.getElementById("r" + j).innerHTML = '<td></td><td></td>';
+                }
+            }
+            var player = data[i];
+            var firstName = player.first_name;
+            var lastName = player.last_name;
+            var team = player.team.name;
+            document.getElementById("r" + i).innerHTML = '<td>' + firstName + ' ' + lastName + '</td><td>' + team + '</td>';
+        }
+
+        //document.write('</tbody></table>')
+    }
+    request.send();
+}
+
+var listButtons = function(per_page){
+    var request = new XMLHttpRequest();
+    request.open("GET", 'https://www.balldontlie.io/api/v1/players?page=1?per_page=' + per_page, true);
+    request.onload = function(){
+        var dataArray = JSON.parse(this.response);
+        var meta = dataArray.meta;
+        for(var i = 1; i <= meta.total_pages; i++){
+            document.write('<button onclick = "listPlayers(' + i + ',' + per_page + ')">' + i + '</button>');
+        }
+    }
+    request.send();
+}
