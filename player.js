@@ -34,7 +34,8 @@ var generateTable = function(per_page){
     for(var i = 0; i < per_page; i++){
         document.write('<tr id = "r' + i + '"></tr>');
     }
-    document.write('</tbody></table>')
+    document.write('</tbody></table>');
+    document.write('<a href = "random.html"><button>Get a Random Player</button></a><br>');
 }
 
 var listPlayers = function(page, per_page){
@@ -65,6 +66,7 @@ var listPlayers = function(page, per_page){
 }
 
 var listButtons = function(per_page){
+    
     var request = new XMLHttpRequest();
     request.open("GET", 'https://www.balldontlie.io/api/v1/players?page=1?per_page=' + per_page, true);
     request.onload = function(){
