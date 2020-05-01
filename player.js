@@ -51,19 +51,28 @@ var displayPlayer = function(id){
         var weight = data.weight_pounds;
         var team = data.team.name;
         document.getElementById("name").innerHTML = `${firstName} ${lastName}`;
+        document.getElementById("name").style = 'color: lightblue; font-family: Arial, Helvetica, sans-serif';
+
         document.getElementById("position").innerHTML = `Position: ${position}`;
         if(data.position == ""){
             document.getElementById("position").innerHTML = 'Position: Unknown';;
         }
+        document.getElementById("position").style = 'color: rgb(8, 44, 68); font-family: Arial, Helvetica, sans-serif';
+
         document.getElementById("height").innerHTML = `Height: ${heightFeet} feet and ${heightInches} inches`;
         if(data.height_feet == null){
             document.getElementById("height").innerHTML = 'Height: Unknown';;
         }
+        document.getElementById("height").style = 'color: rgb(8, 44, 68); font-family: Arial, Helvetica, sans-serif';
+
         document.getElementById("weight").innerHTML = `Weight: ${weight} pounds`;
         if(data.weight_pounds == null){
             document.getElementById("weight").innerHTML = 'Weight: Unknown';;
         }
+        document.getElementById("weight").style = 'color: rgb(8, 44, 68); font-family: Arial, Helvetica, sans-serif';
+
         document.getElementById("team").innerHTML = `Team: ${team}`;
+        document.getElementById("team").style = 'color: rgb(8, 44, 68); font-family: Arial, Helvetica, sans-serif';
     }
     request.send();
 }
